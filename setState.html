@@ -28,6 +28,10 @@
 		render();
 		*/
 		function App() {
+			//data - 값(counter), modifier - 값을 변경하는 함수(setCounter)
+			//modifier 함수를 가지고 state를 변경할때 컴포넌트가 재생성(Rerendering).
+			//= 새로운 값을 가지고 리렌더링 되는 것, 데이터가 바뀔 때마다 컴포넌트를 리렌더링하고 UI를 refresh
+			//모든 부분을 refresh하는 것이 아닌 바뀌는 데이터에 대해서만 refresh
 			const [counter, setCounter] = React.useState(0);
 			/* ==
 			const data = React.useState(0);
