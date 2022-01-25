@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<body>
+		<div id="root"></div>
+	</body>
+	<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+	<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+	<script type="text/babel">
+		//react js로 element 생성
+		//변수 이름은 html태그와 같지 않아도 되지만 ""내부는 html태그와 같아야 함
+		/*
+		const h3 = React.createElement(
+			"h3", 
+			{ id: "title", 
+			onMouseEnter: () => console.log("mouse enter") }, //{ id : "sexy-span", style : { color : "red" } }, (property)
+			"Hello I'm a title");
+		*/
+		//JSX
+		//컴포넌트 함수로 만들기 (arrow function)
+		const Title = () => (<h3 id="title" onMouseEnter = { ()=> console.log("mouse enter") }> Hello I'm a title </h3>);
+		const root = document.getElementById("root");
+		/*
+		const btn = React.createElement(
+			"button",
+			{ onClick: () => console.log("I'm clicked") , 
+			style: { backgroundColor: "tomato"},
+			},
+			"Click me"
+			);
+		*/
+		const Button = () => (<button style = {{ backgroundColor: "tomato", }} onClick = {() => console.log("i'm clicked")}> Click me </button>);
+		//const container = React.createElement("div", null, [Title, Button]);
+		//함수로 직접 만든 컴포넌트들은 반드시 대문자로 정해야함.
+		//소문자면 HTML 태그라고 인식함.
+		const Container = () => (<div> <Title /> <Button /> </div>);
+		ReactDOM.render(<Container />, root);
+	</script>
+</html>

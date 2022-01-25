@@ -39,7 +39,11 @@
 			const setCounter = data[1];
 			*/
 			const onClick = () => {
-				setCounter(counter + 1);
+				//state를 설정하는 방법
+				//1. 직접 값을 변경하는 것(식, 숫자를 통해)
+				//setCounter(counter + 1);
+				//2. 함수를 전달하기
+				setCounter((current) => current + 1);
 			};
 			return (
 				<div>
