@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<body>
+		<div id="root"></div>
+	</body>
+	<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+	<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+	<script type="text/babel">
+	 	const root = document.getElementById("root");
+
+		function Btn({text, onClick}) {
+			console.log(text + " was rendered");
+			return (
+				<button 
+					onClick={onClick}
+					style={{
+						backgroundColor: "tomato",
+						color: "white",
+						padding: "10px 20px",
+						border: 0,
+						borderRadius: 10
+					}}
+				>
+					{text}
+				</button>
+			);
+		}
+
+
+		//props가 변경되면 모든 컴포넌트가 다시 렌더링 된다. 
+		//Save Change 버튼의 state가 변경되어 props(value)까지 변경 
+		//props가 바뀌지 않는 요소는 다시 렌더링을 할 필요가 없다. (예: Confirm 버튼)
+		//-> 리액트의 memo(rize) 기능을 통해 리렌더링을 막을 수 있음
+		//= 어플리케이션이 느려지는 것을 방지할 수 있음
+		const MemorizedBtn = React.memo(Btn);
+		function App() {
+			const [value, setValue] = React.useState("Save Changes");
+			const changeValue = () => setValue("Revert Changes");
+			/*
+				return (
+				<div>
+					<Btn text={value} onClick={changeValue}/>
+					<Btn text="Confirm" />
+				</div>
+			);
+			*/
+
+			//커스텀 컴포넌트에 넣은 요소 onClick은 실제 이벤트 리스너가 아니라 하나의 prop이다
+			//실제 이벤트 리스너는 자바스크립트 코드, html에 넣어야함
+			//커스텀 컴포넌트에 설정한 요소들은 (style, event 등) 적용되지 않고 
+			//Btn이라는 함수에서 JSX 코드로 설정시켜 줘야지 적용이 된다.
+			return (
+				<div>
+					<MemorizedBtn text={value} onClick={changeValue}/>
+					<MemorizedBtn text="Confirm" />
+				</div>
+			);
+		}
+		ReactDOM.render(<App />, root);
+	</script>
+</html>
